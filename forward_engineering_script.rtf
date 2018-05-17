@@ -1,0 +1,464 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
+{\*\generator Riched20 10.0.16299}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\f0\fs22\lang9 -- MySQL Workbench Forward Engineering\par
+\par
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;\par
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;\par
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';\par
+\par
+-- -----------------------------------------------------\par
+-- Schema mydb\par
+-- -----------------------------------------------------\par
+DROP SCHEMA IF EXISTS `mydb` ;\par
+\par
+-- -----------------------------------------------------\par
+-- Schema mydb\par
+-- -----------------------------------------------------\par
+CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;\par
+USE `mydb` ;\par
+\par
+-- -----------------------------------------------------\par
+-- Table `mydb`.`Manufacturing_Code`\par
+-- -----------------------------------------------------\par
+DROP TABLE IF EXISTS `mydb`.`Manufacturing_Code` ;\par
+\par
+CREATE TABLE IF NOT EXISTS `mydb`.`Manufacturing_Code` (\par
+  `NAICS_CODE` INT NOT NULL,\par
+  PRIMARY KEY (`NAICS_CODE`))\par
+ENGINE = InnoDB;\par
+\par
+\par
+-- -----------------------------------------------------\par
+-- Table `mydb`.`Company`\par
+-- -----------------------------------------------------\par
+DROP TABLE IF EXISTS `mydb`.`Company` ;\par
+\par
+CREATE TABLE IF NOT EXISTS `mydb`.`Company` (\par
+  `Company_ID` INT NOT NULL,\par
+  `Company_Name` VARCHAR(45) NOT NULL,\par
+  `Company_Rating` INT NOT NULL,\par
+  PRIMARY KEY (`Company_ID`))\par
+ENGINE = InnoDB;\par
+\par
+\par
+-- -----------------------------------------------------\par
+-- Table `mydb`.`Location`\par
+-- -----------------------------------------------------\par
+DROP TABLE IF EXISTS `mydb`.`Location` ;\par
+\par
+CREATE TABLE IF NOT EXISTS `mydb`.`Location` (\par
+  `Location_ID` INT NOT NULL,\par
+  `Street` VARCHAR(45) NOT NULL,\par
+  `City` VARCHAR(45) NOT NULL,\par
+  `State` VARCHAR(45) NOT NULL,\par
+  `Country` VARCHAR(45) NOT NULL,\par
+  `Zipcode` VARCHAR(45) NOT NULL,\par
+  PRIMARY KEY (`Location_ID`))\par
+ENGINE = InnoDB;\par
+\par
+\par
+-- -----------------------------------------------------\par
+-- Table `mydb`.`Utility`\par
+-- -----------------------------------------------------\par
+DROP TABLE IF EXISTS `mydb`.`Utility` ;\par
+\par
+CREATE TABLE IF NOT EXISTS `mydb`.`Utility` (\par
+  `Utility_Id` INT NOT NULL,\par
+  `Utility_Name` VARCHAR(45) NOT NULL,\par
+  `Utility_Description` VARCHAR(45) NOT NULL,\par
+  PRIMARY KEY (`Utility_Id`))\par
+ENGINE = InnoDB;\par
+\par
+\par
+-- -----------------------------------------------------\par
+-- Table `mydb`.`Manufacturing_Plant`\par
+-- -----------------------------------------------------\par
+DROP TABLE IF EXISTS `mydb`.`Manufacturing_Plant` ;\par
+\par
+CREATE TABLE IF NOT EXISTS `mydb`.`Manufacturing_Plant` (\par
+  `MP_ID` INT NOT NULL,\par
+  `MP_NAME` VARCHAR(45) NOT NULL,\par
+  `Manufacturing_Code_NAICS_CODE` INT NOT NULL,\par
+  `Company_Company_ID` INT NOT NULL,\par
+  `Location_Location_ID` INT NOT NULL,\par
+  `Utility_Utility_Id` INT NOT NULL,\par
+  PRIMARY KEY (`MP_ID`, `Manufacturing_Code_NAICS_CODE`, `Company_Company_ID`, `Location_Location_ID`, `Utility_Utility_Id`),\par
+  INDEX `fk_Manufacturing_Plant_Manufacturing_Code_idx` (`Manufacturing_Code_NAICS_CODE` ASC),\par
+  INDEX `fk_Manufacturing_Plant_Company1_idx` (`Company_Company_ID` ASC),\par
+  INDEX `fk_Manufacturing_Plant_Location1_idx` (`Location_Location_ID` ASC),\par
+  INDEX `fk_Manufacturing_Plant_Utility1_idx` (`Utility_Utility_Id` ASC),\par
+  CONSTRAINT `fk_Manufacturing_Plant_Manufacturing_Code`\par
+    FOREIGN KEY (`Manufacturing_Code_NAICS_CODE`)\par
+    REFERENCES `mydb`.`Manufacturing_Code` (`NAICS_CODE`)\par
+    ON DELETE NO ACTION\par
+    ON UPDATE NO ACTION,\par
+  CONSTRAINT `fk_Manufacturing_Plant_Company1`\par
+    FOREIGN KEY (`Company_Company_ID`)\par
+    REFERENCES `mydb`.`Company` (`Company_ID`)\par
+    ON DELETE NO ACTION\par
+    ON UPDATE NO ACTION,\par
+  CONSTRAINT `fk_Manufacturing_Plant_Location1`\par
+    FOREIGN KEY (`Location_Location_ID`)\par
+    REFERENCES `mydb`.`Location` (`Location_ID`)\par
+    ON DELETE NO ACTION\par
+    ON UPDATE NO ACTION,\par
+  CONSTRAINT `fk_Manufacturing_Plant_Utility1`\par
+    FOREIGN KEY (`Utility_Utility_Id`)\par
+    REFERENCES `mydb`.`Utility` (`Utility_Id`)\par
+    ON DELETE NO ACTION\par
+    ON UPDATE NO ACTION)\par
+ENGINE = InnoDB;\par
+\par
+\par
+-- -----------------------------------------------------\par
+-- Table `mydb`.`Employee`\par
+-- -----------------------------------------------------\par
+DROP TABLE IF EXISTS `mydb`.`Employee` ;\par
+\par
+CREATE TABLE IF NOT EXISTS `mydb`.`Employee` (\par
+  `Employee_ID` INT NOT NULL,\par
+  `Employee_Name` VARCHAR(45) NOT NULL,\par
+  `Employee_Role` VARCHAR(45) NOT NULL,\par
+  `Manufacturing_Plant_MP_ID` INT NOT NULL,\par
+  PRIMARY KEY (`Employee_ID`, `Manufacturing_Plant_MP_ID`),\par
+  INDEX `fk_Employee_Manufacturing_Plant1_idx` (`Manufacturing_Plant_MP_ID` ASC),\par
+  CONSTRAINT `fk_Employee_Manufacturing_Plant1`\par
+    FOREIGN KEY (`Manufacturing_Plant_MP_ID`)\par
+    REFERENCES `mydb`.`Manufacturing_Plant` (`MP_ID`)\par
+    ON DELETE NO ACTION\par
+    ON UPDATE NO ACTION)\par
+ENGINE = InnoDB;\par
+\par
+\par
+-- -----------------------------------------------------\par
+-- Table `mydb`.`Distributor`\par
+-- -----------------------------------------------------\par
+DROP TABLE IF EXISTS `mydb`.`Distributor` ;\par
+\par
+CREATE TABLE IF NOT EXISTS `mydb`.`Distributor` (\par
+  `D_ID` VARCHAR(45) NOT NULL,\par
+  `D_Name` VARCHAR(40) NOT NULL,\par
+  `D_Phone` INT NOT NULL,\par
+  `D_Email` VARCHAR(45) NOT NULL,\par
+  `Company_Company_ID` INT NOT NULL,\par
+  PRIMARY KEY (`Company_Company_ID`, `D_ID`),\par
+  INDEX `fk_Distributor/Dealership_Company1_idx` (`Company_Company_ID` ASC),\par
+  CONSTRAINT `fk_Distributor/Dealership_Company1`\par
+    FOREIGN KEY (`Company_Company_ID`)\par
+    REFERENCES `mydb`.`Company` (`Company_ID`)\par
+    ON DELETE NO ACTION\par
+    ON UPDATE NO ACTION)\par
+ENGINE = InnoDB;\par
+\par
+\par
+-- -----------------------------------------------------\par
+-- Table `mydb`.`Model`\par
+-- -----------------------------------------------------\par
+DROP TABLE IF EXISTS `mydb`.`Model` ;\par
+\par
+CREATE TABLE IF NOT EXISTS `mydb`.`Model` (\par
+  `Model_Number` VARCHAR(40) NOT NULL,\par
+  `Model_Name` VARCHAR(45) NOT NULL,\par
+  `Model_Transmission` VARCHAR(45) NOT NULL,\par
+  `Model_Type` VARCHAR(45) NOT NULL,\par
+  PRIMARY KEY (`Model_Number`))\par
+ENGINE = InnoDB;\par
+\par
+\par
+-- -----------------------------------------------------\par
+-- Table `mydb`.`Vehicle`\par
+-- -----------------------------------------------------\par
+DROP TABLE IF EXISTS `mydb`.`Vehicle` ;\par
+\par
+CREATE TABLE IF NOT EXISTS `mydb`.`Vehicle` (\par
+  `Vehicle_ID` INT NOT NULL,\par
+  `Vehicle_Name` VARCHAR(45) NOT NULL,\par
+  `Model_Model_Number` VARCHAR(40) NOT NULL,\par
+  `Company_Company_ID` INT NOT NULL,\par
+  `Model_Model_Number1` VARCHAR(40) NOT NULL,\par
+  PRIMARY KEY (`Vehicle_ID`, `Model_Model_Number`, `Company_Company_ID`, `Model_Model_Number1`),\par
+  INDEX `fk_Vehicle_Company1_idx` (`Company_Company_ID` ASC),\par
+  INDEX `fk_Vehicle_Model1_idx` (`Model_Model_Number1` ASC),\par
+  CONSTRAINT `fk_Vehicle_Company1`\par
+    FOREIGN KEY (`Company_Company_ID`)\par
+    REFERENCES `mydb`.`Company` (`Company_ID`)\par
+    ON DELETE NO ACTION\par
+    ON UPDATE NO ACTION,\par
+  CONSTRAINT `fk_Vehicle_Model1`\par
+    FOREIGN KEY (`Model_Model_Number1`)\par
+    REFERENCES `mydb`.`Model` (`Model_Number`)\par
+    ON DELETE NO ACTION\par
+    ON UPDATE NO ACTION)\par
+ENGINE = InnoDB;\par
+\par
+\par
+-- -----------------------------------------------------\par
+-- Table `mydb`.`Demand`\par
+-- -----------------------------------------------------\par
+DROP TABLE IF EXISTS `mydb`.`Demand` ;\par
+\par
+CREATE TABLE IF NOT EXISTS `mydb`.`Demand` (\par
+  `Demand_Id` VARCHAR(45) NOT NULL,\par
+  `Demand_Quantity` INT NOT NULL,\par
+  `Demand_Date` DATE NOT NULL,\par
+  `Company_Company_ID` INT NOT NULL,\par
+  `Distributor_Company_Company_ID` INT NOT NULL,\par
+  `Distributor_D_ID` VARCHAR(45) NOT NULL,\par
+  `Vehicle_Vehicle_ID` INT NOT NULL,\par
+  `Vehicle_Model_Model_Number` VARCHAR(40) NOT NULL,\par
+  `Vehicle_Company_Company_ID` INT NOT NULL,\par
+  PRIMARY KEY (`Demand_Id`),\par
+  INDEX `fk_Demand_Company1_idx` (`Company_Company_ID` ASC),\par
+  INDEX `fk_Demand_Distributor1_idx` (`Distributor_Company_Company_ID` ASC, `Distributor_D_ID` ASC),\par
+  INDEX `fk_Demand_Vehicle1_idx` (`Vehicle_Vehicle_ID` ASC, `Vehicle_Model_Model_Number` ASC, `Vehicle_Company_Company_ID` ASC),\par
+  CONSTRAINT `fk_Demand_Company1`\par
+    FOREIGN KEY (`Company_Company_ID`)\par
+    REFERENCES `mydb`.`Company` (`Company_ID`)\par
+    ON DELETE NO ACTION\par
+    ON UPDATE NO ACTION,\par
+  CONSTRAINT `fk_Demand_Distributor1`\par
+    FOREIGN KEY (`Distributor_Company_Company_ID` , `Distributor_D_ID`)\par
+    REFERENCES `mydb`.`Distributor` (`Company_Company_ID` , `D_ID`)\par
+    ON DELETE NO ACTION\par
+    ON UPDATE NO ACTION,\par
+  CONSTRAINT `fk_Demand_Vehicle1`\par
+    FOREIGN KEY (`Vehicle_Vehicle_ID` , `Vehicle_Model_Model_Number` , `Vehicle_Company_Company_ID`)\par
+    REFERENCES `mydb`.`Vehicle` (`Vehicle_ID` , `Model_Model_Number` , `Company_Company_ID`)\par
+    ON DELETE NO ACTION\par
+    ON UPDATE NO ACTION)\par
+ENGINE = InnoDB;\par
+\par
+\par
+-- -----------------------------------------------------\par
+-- Table `mydb`.`Warehouse`\par
+-- -----------------------------------------------------\par
+DROP TABLE IF EXISTS `mydb`.`Warehouse` ;\par
+\par
+CREATE TABLE IF NOT EXISTS `mydb`.`Warehouse` (\par
+  `Warehouse_ID` INT NOT NULL,\par
+  `Warehouse_Name` VARCHAR(20) NOT NULL,\par
+  `Location_Location_ID` INT NOT NULL,\par
+  `Manufacturing_Plant_MP_ID` INT NOT NULL,\par
+  PRIMARY KEY (`Warehouse_ID`, `Location_Location_ID`),\par
+  INDEX `fk_Warehouse_Location1_idx` (`Location_Location_ID` ASC),\par
+  INDEX `fk_Warehouse_Manufacturing_Plant1_idx` (`Manufacturing_Plant_MP_ID` ASC),\par
+  CONSTRAINT `fk_Warehouse_Location1`\par
+    FOREIGN KEY (`Location_Location_ID`)\par
+    REFERENCES `mydb`.`Location` (`Location_ID`)\par
+    ON DELETE NO ACTION\par
+    ON UPDATE NO ACTION,\par
+  CONSTRAINT `fk_Warehouse_Manufacturing_Plant1`\par
+    FOREIGN KEY (`Manufacturing_Plant_MP_ID`)\par
+    REFERENCES `mydb`.`Manufacturing_Plant` (`MP_ID`)\par
+    ON DELETE NO ACTION\par
+    ON UPDATE NO ACTION)\par
+ENGINE = InnoDB;\par
+\par
+\par
+-- -----------------------------------------------------\par
+-- Table `mydb`.`Request`\par
+-- -----------------------------------------------------\par
+DROP TABLE IF EXISTS `mydb`.`Request` ;\par
+\par
+CREATE TABLE IF NOT EXISTS `mydb`.`Request` (\par
+  `Request_ID` VARCHAR(45) NOT NULL,\par
+  `Request_Quantity` INT NOT NULL,\par
+  `Request_Date` DATE NOT NULL,\par
+  `Company_Company_ID` INT NOT NULL,\par
+  `Vehicle_Vehicle_ID` INT NOT NULL,\par
+  `Vehicle_Model_Model_Number` VARCHAR(40) NOT NULL,\par
+  `Vehicle_Company_Company_ID` INT NOT NULL,\par
+  `Vehicle_Model_Model_Number1` VARCHAR(40) NOT NULL,\par
+  PRIMARY KEY (`Request_ID`),\par
+  INDEX `fk_Request_Company1_idx` (`Company_Company_ID` ASC),\par
+  INDEX `fk_Request_Vehicle1_idx` (`Vehicle_Vehicle_ID` ASC, `Vehicle_Model_Model_Number` ASC, `Vehicle_Company_Company_ID` ASC, `Vehicle_Model_Model_Number1` ASC),\par
+  CONSTRAINT `fk_Request_Company1`\par
+    FOREIGN KEY (`Company_Company_ID`)\par
+    REFERENCES `mydb`.`Company` (`Company_ID`)\par
+    ON DELETE NO ACTION\par
+    ON UPDATE NO ACTION,\par
+  CONSTRAINT `fk_Request_Vehicle1`\par
+    FOREIGN KEY (`Vehicle_Vehicle_ID` , `Vehicle_Model_Model_Number` , `Vehicle_Company_Company_ID` , `Vehicle_Model_Model_Number1`)\par
+    REFERENCES `mydb`.`Vehicle` (`Vehicle_ID` , `Model_Model_Number` , `Company_Company_ID` , `Model_Model_Number1`)\par
+    ON DELETE NO ACTION\par
+    ON UPDATE NO ACTION)\par
+ENGINE = InnoDB;\par
+\par
+\par
+-- -----------------------------------------------------\par
+-- Table `mydb`.`Invoice`\par
+-- -----------------------------------------------------\par
+DROP TABLE IF EXISTS `mydb`.`Invoice` ;\par
+\par
+CREATE TABLE IF NOT EXISTS `mydb`.`Invoice` (\par
+  `Invoice_Id` INT NOT NULL,\par
+  `Invoice_Date` DATE NOT NULL,\par
+  `Invoice_Amount` INT NOT NULL,\par
+  PRIMARY KEY (`Invoice_Id`))\par
+ENGINE = InnoDB;\par
+\par
+\par
+-- -----------------------------------------------------\par
+-- Table `mydb`.`Production`\par
+-- -----------------------------------------------------\par
+DROP TABLE IF EXISTS `mydb`.`Production` ;\par
+\par
+CREATE TABLE IF NOT EXISTS `mydb`.`Production` (\par
+  `Production_ID` VARCHAR(45) NOT NULL,\par
+  `Production_Status` VARCHAR(45) NOT NULL,\par
+  `Production_Quantity` VARCHAR(45) NOT NULL,\par
+  `Manufacturing_Plant_MP_ID` INT NOT NULL,\par
+  `Request_Request_ID` VARCHAR(45) NOT NULL,\par
+  `Invoice_Invoice_Id` INT NOT NULL,\par
+  PRIMARY KEY (`Production_ID`, `Manufacturing_Plant_MP_ID`),\par
+  INDEX `fk_Production_Manufacturing_Plant1_idx` (`Manufacturing_Plant_MP_ID` ASC),\par
+  INDEX `fk_Production_Request1_idx` (`Request_Request_ID` ASC),\par
+  INDEX `fk_Production_Invoice1_idx` (`Invoice_Invoice_Id` ASC),\par
+  CONSTRAINT `fk_Production_Manufacturing_Plant1`\par
+    FOREIGN KEY (`Manufacturing_Plant_MP_ID`)\par
+    REFERENCES `mydb`.`Manufacturing_Plant` (`MP_ID`)\par
+    ON DELETE NO ACTION\par
+    ON UPDATE NO ACTION,\par
+  CONSTRAINT `fk_Production_Request1`\par
+    FOREIGN KEY (`Request_Request_ID`)\par
+    REFERENCES `mydb`.`Request` (`Request_ID`)\par
+    ON DELETE NO ACTION\par
+    ON UPDATE NO ACTION,\par
+  CONSTRAINT `fk_Production_Invoice1`\par
+    FOREIGN KEY (`Invoice_Invoice_Id`)\par
+    REFERENCES `mydb`.`Invoice` (`Invoice_Id`)\par
+    ON DELETE NO ACTION\par
+    ON UPDATE NO ACTION)\par
+ENGINE = InnoDB;\par
+\par
+\par
+-- -----------------------------------------------------\par
+-- Table `mydb`.`Cost`\par
+-- -----------------------------------------------------\par
+DROP TABLE IF EXISTS `mydb`.`Cost` ;\par
+\par
+CREATE TABLE IF NOT EXISTS `mydb`.`Cost` (\par
+  `Price` INT NOT NULL,\par
+  `Model_Model_Number` VARCHAR(40) NOT NULL,\par
+  PRIMARY KEY (`Price`, `Model_Model_Number`),\par
+  INDEX `fk_Cost_Model1_idx` (`Model_Model_Number` ASC),\par
+  CONSTRAINT `fk_Cost_Model1`\par
+    FOREIGN KEY (`Model_Model_Number`)\par
+    REFERENCES `mydb`.`Model` (`Model_Number`)\par
+    ON DELETE NO ACTION\par
+    ON UPDATE NO ACTION)\par
+ENGINE = InnoDB;\par
+\par
+\par
+-- -----------------------------------------------------\par
+-- Table `mydb`.`Shipment`\par
+-- -----------------------------------------------------\par
+DROP TABLE IF EXISTS `mydb`.`Shipment` ;\par
+\par
+CREATE TABLE IF NOT EXISTS `mydb`.`Shipment` (\par
+  `Shipment_Id` INT NOT NULL,\par
+  `Shipment_Delivery_Date` VARCHAR(45) NOT NULL,\par
+  `Shipment_Quantity` VARCHAR(45) NOT NULL,\par
+  `Shipment_Status` VARCHAR(45) NOT NULL,\par
+  `Shipper_Name` VARCHAR(45) NOT NULL,\par
+  `Production_Production_ID` VARCHAR(45) NOT NULL,\par
+  `Production_Manufacturing_Plant_MP_ID` INT NOT NULL,\par
+  `Distributor_Company_Company_ID` INT NOT NULL,\par
+  `Distributor_D_ID` VARCHAR(45) NOT NULL,\par
+  PRIMARY KEY (`Shipment_Id`),\par
+  INDEX `fk_Shipment_Production1_idx` (`Production_Production_ID` ASC, `Production_Manufacturing_Plant_MP_ID` ASC),\par
+  INDEX `fk_Shipment_Distributor1_idx` (`Distributor_Company_Company_ID` ASC, `Distributor_D_ID` ASC),\par
+  CONSTRAINT `fk_Shipment_Production1`\par
+    FOREIGN KEY (`Production_Production_ID` , `Production_Manufacturing_Plant_MP_ID`)\par
+    REFERENCES `mydb`.`Production` (`Production_ID` , `Manufacturing_Plant_MP_ID`)\par
+    ON DELETE NO ACTION\par
+    ON UPDATE NO ACTION,\par
+  CONSTRAINT `fk_Shipment_Distributor1`\par
+    FOREIGN KEY (`Distributor_Company_Company_ID` , `Distributor_D_ID`)\par
+    REFERENCES `mydb`.`Distributor` (`Company_Company_ID` , `D_ID`)\par
+    ON DELETE NO ACTION\par
+    ON UPDATE NO ACTION)\par
+ENGINE = InnoDB;\par
+\par
+\par
+-- -----------------------------------------------------\par
+-- Table `mydb`.`Payment`\par
+-- -----------------------------------------------------\par
+DROP TABLE IF EXISTS `mydb`.`Payment` ;\par
+\par
+CREATE TABLE IF NOT EXISTS `mydb`.`Payment` (\par
+  `Payment_Id` INT NOT NULL,\par
+  `Payment_Method` VARCHAR(45) NOT NULL,\par
+  `Payment_Date` DATE NOT NULL,\par
+  `Payment_Status` VARCHAR(45) NOT NULL,\par
+  `Invoice_Invoice_Id` INT NOT NULL,\par
+  `Distributor_Company_Company_ID` INT NOT NULL,\par
+  `Distributor_D_ID` VARCHAR(45) NOT NULL,\par
+  PRIMARY KEY (`Payment_Id`),\par
+  INDEX `fk_Payment_Invoice1_idx` (`Invoice_Invoice_Id` ASC),\par
+  INDEX `fk_Payment_Distributor1_idx` (`Distributor_Company_Company_ID` ASC, `Distributor_D_ID` ASC),\par
+  CONSTRAINT `fk_Payment_Invoice1`\par
+    FOREIGN KEY (`Invoice_Invoice_Id`)\par
+    REFERENCES `mydb`.`Invoice` (`Invoice_Id`)\par
+    ON DELETE NO ACTION\par
+    ON UPDATE NO ACTION,\par
+  CONSTRAINT `fk_Payment_Distributor1`\par
+    FOREIGN KEY (`Distributor_Company_Company_ID` , `Distributor_D_ID`)\par
+    REFERENCES `mydb`.`Distributor` (`Company_Company_ID` , `D_ID`)\par
+    ON DELETE NO ACTION\par
+    ON UPDATE NO ACTION)\par
+ENGINE = InnoDB;\par
+\par
+\par
+-- -----------------------------------------------------\par
+-- Table `mydb`.`Production_has_Vehicle`\par
+-- -----------------------------------------------------\par
+DROP TABLE IF EXISTS `mydb`.`Production_has_Vehicle` ;\par
+\par
+CREATE TABLE IF NOT EXISTS `mydb`.`Production_has_Vehicle` (\par
+  `Production_Production_ID` VARCHAR(45) NOT NULL,\par
+  `Production_Manufacturing_Plant_MP_ID` INT NOT NULL,\par
+  `Vehicle_Vehicle_ID` INT NOT NULL,\par
+  `Vehicle_Model_Model_Number` VARCHAR(40) NOT NULL,\par
+  `Vehicle_Company_Company_ID` INT NOT NULL,\par
+  PRIMARY KEY (`Production_Production_ID`, `Production_Manufacturing_Plant_MP_ID`, `Vehicle_Vehicle_ID`, `Vehicle_Model_Model_Number`, `Vehicle_Company_Company_ID`),\par
+  INDEX `fk_Production_has_Vehicle_Vehicle1_idx` (`Vehicle_Vehicle_ID` ASC, `Vehicle_Model_Model_Number` ASC, `Vehicle_Company_Company_ID` ASC),\par
+  INDEX `fk_Production_has_Vehicle_Production1_idx` (`Production_Production_ID` ASC, `Production_Manufacturing_Plant_MP_ID` ASC),\par
+  CONSTRAINT `fk_Production_has_Vehicle_Production1`\par
+    FOREIGN KEY (`Production_Production_ID` , `Production_Manufacturing_Plant_MP_ID`)\par
+    REFERENCES `mydb`.`Production` (`Production_ID` , `Manufacturing_Plant_MP_ID`)\par
+    ON DELETE NO ACTION\par
+    ON UPDATE NO ACTION,\par
+  CONSTRAINT `fk_Production_has_Vehicle_Vehicle1`\par
+    FOREIGN KEY (`Vehicle_Vehicle_ID` , `Vehicle_Model_Model_Number` , `Vehicle_Company_Company_ID`)\par
+    REFERENCES `mydb`.`Vehicle` (`Vehicle_ID` , `Model_Model_Number` , `Company_Company_ID`)\par
+    ON DELETE NO ACTION\par
+    ON UPDATE NO ACTION)\par
+ENGINE = InnoDB;\par
+\par
+\par
+-- -----------------------------------------------------\par
+-- Table `mydb`.`u_Usage`\par
+-- -----------------------------------------------------\par
+DROP TABLE IF EXISTS `mydb`.`u_Usage` ;\par
+\par
+CREATE TABLE IF NOT EXISTS `mydb`.`u_Usage` (\par
+  `Usage Quantity` INT NOT NULL,\par
+  `Start Date` VARCHAR(45) NOT NULL,\par
+  `End Date` VARCHAR(45) NOT NULL,\par
+  `Utility_Utility_Id` INT NOT NULL,\par
+  PRIMARY KEY (`Usage Quantity`, `Utility_Utility_Id`),\par
+  INDEX `fk_Usage_Utility1_idx` (`Utility_Utility_Id` ASC),\par
+  CONSTRAINT `fk_Usage_Utility1`\par
+    FOREIGN KEY (`Utility_Utility_Id`)\par
+    REFERENCES `mydb`.`Utility` (`Utility_Id`)\par
+    ON DELETE NO ACTION\par
+    ON UPDATE NO ACTION)\par
+ENGINE = InnoDB;\par
+\par
+\par
+SET SQL_MODE=@OLD_SQL_MODE;\par
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;\par
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;\par
+}
+ 

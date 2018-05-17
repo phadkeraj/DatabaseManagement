@@ -1,0 +1,463 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
+{\*\generator Riched20 10.0.16299}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\f0\fs22\lang9 use mydb;\par
+show tables;\par
+\par
+insert into location\par
+values(1,'Roxbury','Boston','MA','USA','02120');\par
+insert into location\par
+values(2,'2nd Penn Street','New York','NY','USA','06114');\par
+insert into location\par
+values(3,'21st Street ','New Jersey','NJ','USA','02150');\par
+insert into location\par
+values(4,'34th Street ','Los Angeles','LA','USA','02120');\par
+insert into location\par
+values(5,'14th Mass Ave','Boston','MA','USA','02115');\par
+\par
+insert into manufacturing_code\par
+values(1845);\par
+\par
+insert into Company\par
+values(1,'Ford Motors',10);\par
+\par
+insert into utility\par
+values(1,'Electricity','Amount of electricity used');\par
+insert into utility\par
+values(2,'Gas','Amount of gas used');\par
+insert into u_usage\par
+values(250,'2017-11-1','2017-12-1',1);\par
+insert into u_usage\par
+values(200,'2017-10-1','2017-11-1',1);\par
+insert into u_usage\par
+values(275,'2017-09-1','2017-10-1',1);\par
+insert into u_usage\par
+values(430,'2017-08-1','2017-09-1',1);\par
+insert into u_usage\par
+values(300,'2017-07-1','2017-08-1',1);\par
+insert into u_usage\par
+values(155,'2017-06-1','2017-07-1',1);\par
+insert into u_usage\par
+values(450,'2017-05-1','2017-06-1',1);\par
+insert into u_usage\par
+values(260,'2017-04-1','2017-05-1',1);\par
+insert into u_usage\par
+values(280,'2017-03-1','2017-04-1',1);\par
+insert into u_usage\par
+values(175,'2017-02-1','2017-03-1',1);\par
+insert into u_usage\par
+values(148,'2017-01-1','2017-02-1',1);\par
+insert into u_usage\par
+values(212,'2016-12-1','2017-01-1',1);\par
+\par
+\par
+insert into manufacturing_plant\par
+values(1,'Ford Motors Division 1',1845,1,1,1);\par
+insert into manufacturing_plant\par
+values(2,'Ford Motors Division alpha',1845,1,2,1);\par
+insert into manufacturing_plant\par
+values(3,'Ford Motors Division beta',1845,1,3,1);\par
+insert into manufacturing_plant\par
+values(4,'Ford Motors Division gama',1845,1,4,1);\par
+insert into manufacturing_plant\par
+values(5,'Ford Motors Division pico',1845,1,5,1);\par
+\par
+select * from warehouse;\par
+insert into warehouse\par
+values(1,'Ford Division 1 WH',1,1);\par
+insert into warehouse\par
+values(2,'Ford ALPHA WH',2,2);\par
+insert into warehouse\par
+values(3,'Ford BETA WH',3,3);\par
+insert into warehouse\par
+values(4,'Ford GAMMA WH',4,4);\par
+insert into warehouse\par
+values(5,'Ford  PICO WH',5,5);\par
+\par
+\par
+insert into employee\par
+values(1,'TUSHAR','Company Manager',1);\par
+insert into employee\par
+values(2,'DHARIT','Company Manager',2);\par
+insert into employee\par
+values(3,'SAMEER','Company Manager',3);\par
+insert into employee\par
+values(4,'SAMI','Company Manager',4);\par
+insert into employee\par
+values(5,'VIKAS','Company Manager',5);\par
+insert into employee\par
+values(6,'NAMAN','Employee',1);\par
+insert into employee\par
+values(7,'JAY','Employee',2);\par
+insert into employee\par
+values(8,'RAJ','Employee',3);\par
+insert into employee\par
+values(9,'ASHISH','Employee',4);\par
+insert into employee\par
+values(10,'ADITYA','Employee',5);\par
+\par
+\par
+insert into distributor\par
+values(1,'Symphony Dealers',1100,'sd@gmail.com',1);\par
+insert into distributor\par
+values(2,'Ace Dealers',1180,'ad@gmail.com',1);\par
+insert into distributor\par
+values(3,'Star Dealers',1190,'stard@gmail.com',1);\par
+insert into distributor\par
+values(4,'Speedy Dealers',2100,'speedyd@gmail.com',1);\par
+insert into distributor\par
+values(5,'Optimum Dealers',1700,'od@gmail.com',1);\par
+\par
+\par
+insert into model\par
+values('1','2GA','AUTO','HATCHBACK');\par
+insert into model\par
+values('2','300','AUTO','HATCHBACK');\par
+insert into model\par
+values('3','7W','AUTO','HATCHBACK');\par
+insert into model\par
+values('4','ABEILLE','AUTO','HATCHBACK');\par
+insert into model\par
+values('5','ANGLIA','AUTO','SPORT');\par
+insert into model\par
+values('6','CAPRI','AUTO','SPORT');\par
+insert into model\par
+values('7','MUSTANG','AUTO','SEDAN');\par
+insert into model\par
+values('8','EXP','AUTO','HATCHBACK');\par
+insert into model\par
+values('9','ELITE','AUTO','SEDAN');\par
+insert into model\par
+values('10','PAMPA','AUTO','SPORT');\par
+insert into model\par
+values('11','Figo','AUTO','HATCHBACK');\par
+\par
+\par
+insert into vehicle\par
+values(1,'Ford 2ga','2GA',1,1);\par
+insert into vehicle\par
+values(2,'Ford 300','300',1,2);\par
+insert into vehicle\par
+values(3,'Ford 7W','7W',1,3);\par
+insert into vehicle\par
+values(4,'Ford ABEILLE','ABEILLE',1,4);\par
+insert into vehicle\par
+values(5,'Ford ANGLIA','ANGLIA',1,5);\par
+insert into vehicle\par
+values(6,'Ford CAPRI','CAPRI',1,6);\par
+insert into vehicle\par
+values(7,'Ford MUSTANG','MUSTANG',1,7);\par
+insert into vehicle\par
+values(8,'Ford EXP','EXP',1,8);\par
+insert into vehicle\par
+values(9,'Ford ELITE','ELITE',1,9);\par
+insert into vehicle\par
+values(10,'Ford PAMPA','PAMPA',1,10);\par
+\par
+\par
+insert into cost \par
+values(15000,1);\par
+\par
+insert into cost \par
+values(20000,2);\par
+\par
+insert into cost \par
+values(25000,3);\par
+\par
+insert into cost \par
+values(30000,4);\par
+\par
+insert into cost \par
+values(35000,5);\par
+\par
+insert into cost \par
+values(40000,6);\par
+\par
+insert into cost \par
+values(45000,7);\par
+\par
+insert into cost \par
+values(50000,8);\par
+\par
+insert into cost \par
+values(55000,9);\par
+\par
+insert into cost \par
+values(60000,10);\par
+\par
+\par
+----------------------------------------------------------------------------------------------------\par
+/* Creating Users */\par
+\par
+create user 'ProductionManager@localhost' @'localhost' identified by 'productionManager';\par
+create user 'ComManager@localhost' @'localhost' identified by 'companyManager';\par
+create user 'DistributorDealership@localhost' @'localhost' identified by 'dd';\par
+create user 'Emp@localhost' @'localhost' identified by 'emp';\par
+create user 'ShipmentManager@localhost' @'localhost' identified by 'sm';\par
+create user 'FinanceMan@localhost' @'localhost' identified by'fm';\par
+----------------------------------------------------------------------------------------------------\par
+/* Granting Privileges */\par
+\par
+/* Privilege Granted to Company Manager*/\par
+\par
+grant all on mydb.* to 'ComManager@localhost' @'localhost';\par
+\par
+-----------------------------------------------------------------------------------------------------\par
+/* Privilege Granted to Production Manager*/\par
+\par
+grant all on mydb.Production to 'ProductionManager@localhost' @'localhost';\par
+grant all on mydb.Manufacturing_plant to 'ProductionManager@localhost' @'localhost';\par
+grant all on mydb.Request to 'ProductionManager@localhost' @'localhost';\par
+grant all on mydb.Invoice to 'ProductionManager@localhost' @'localhost';\par
+grant all on mydb.Demand to 'ProductionManager@localhost' @'localhost';\par
+\par
+-------------------------------------------------------------------------------------------------------\par
+/* Privilege Granted to Distributor */\par
+\par
+grant select on mydb.Manufacturing_plant to 'DistributorDealership@localhost' @'localhost';\par
+grant select on mydb.Company to 'DistributorDealership@localhost' @'localhost';\par
+grant select,insert on mydb.Demand to 'DistributorDealership@localhost' @'localhost';\par
+grant select,insert on mydb.Request to 'DistributorDealership@localhost' @'localhost';\par
+\par
+\par
+-------------------------------------------------------------------------------------------------------\par
+/* Privilege Granted to Shipment Manager */\par
+\par
+\par
+grant select,insert,update,delete on mydb.shipment to 'ShipmentManager@localhost' @'localhost';\par
+grant select on mydb.production to 'ShipmentManager@localhost' @'localhost';\par
+grant select on mydb.distributor to 'ShipmentManager@localhost' @'localhost';\par
+\par
+--------------------------------------------------------------------------------------------------------\par
+/* Privilege Granted to Finance Manager */\par
+\par
+grant select,insert,update,delete on mydb.payment to 'FinanceMan@localhost' @'localhost';\par
+grant select on mydb.distributor to 'FinanceMan@localhost' @'localhost';\par
+grant select,insert on mydb.invoice to 'FinanceMan@localhost' @'localhost';\par
+grant select on mydb.* to 'FinanceMan@localhost' @'localhost';\par
+\par
+---------------------------------------------------------------------------------------------------------\par
+/* Privilege Granted to Employee */\par
+\par
+grant select,insert on mydb.employee to 'Emp@localhost' @'localhost';\par
+grant select on mydb.Manufacturing_plant to 'Emp@localhost' @'localhost';\par
+grant select on mydb.company to 'Emp@localhost' @'localhost';\par
+\par
+-----------------------------------------------------------------------------------------------------------\par
+/* Views */\par
+\par
+/* Company Manager wants to view all employees working in a manufacturing plant and company */\par
+create view employee_view as\par
+select employee.Employee_ID, employee.Employee_Name, employee.Employee_Role\par
+,manufacturing_plant.MP_ID,manufacturing_plant.MP_NAME,company.company_id,\par
+company.company_name\par
+from employee as employee inner join\par
+manufacturing_plant as manufacturing_plant inner join\par
+company as company\par
+on employee.Manufacturing_Plant_MP_ID=manufacturing_plant.MP_ID\par
+and \par
+company.company_id=manufacturing_plant.Company_Company_ID;\par
+\par
+--------------------------------------------------------------------------------------------------------------\par
+/* View to display company managers  */\par
+\par
+create view Company_Manager_view as\par
+select employee.Employee_ID,employee.Employee_Name,employee.Employee_Role\par
+,manufacturing_plant.MP_ID,manufacturing_plant.MP_NAME,company.company_id,\par
+company.company_name\par
+from employee as employee inner join\par
+manufacturing_plant as manufacturing_plant inner join\par
+company as company\par
+on employee.Manufacturing_Plant_MP_ID=manufacturing_plant.MP_ID and company.company_id=manufacturing_plant.Company_Company_ID\par
+where employee.Employee_Role='Company Manager';\par
+\par
+----------------------------------------------------------------------------------------------------------------\par
+/* View to display all the vehicles available  */\par
+\par
+create view all_vehicle\par
+as \par
+select vehicle.Vehicle_ID,vehicle.Vehicle_Name,model.Model_Name,model.Model_Number,model.Model_Transmission,model.Model_Type,cost.Price\par
+from vehicle inner join model inner join cost\par
+on vehicle.Model_Model_Number1=model.Model_Number and model.Model_Number=cost.Model_Model_Number ;\par
+\par
+------------------------------------------------------------------------------------------------------------------\par
+/* Trigger to insert into cost table after an insert into the model table */\par
+\par
+\par
+delimiter //\par
+create trigger insert_a_cost\par
+after insert on model\par
+for each row\par
+begin\par
+insert into cost\par
+values(75000,11);\par
+end//\par
+------------------------------------------------------------------------------------------------------------------- \par
+ /* Stored Procedure */\par
+ \par
+ create procedure check_price1(IN val int)\par
+ begin \par
+ select vehicle.Vehicle_ID,vehicle.Vehicle_Name,model.Model_Name,model.Model_Number,cost.Price\par
+ from vehicle inner join model inner join cost \par
+ on vehicle.Model_Model_Number1=model.Model_Number and model.Model_Number=cost.Model_Model_Number\par
+ where Vehicle_ID=val;\par
+ end;\par
+ //\par
+ call check_price1(1);//\par
+ ---------------------------------------------------------------------------------------------------------------------\par
+ /* Locking table company to avoid Insertions */\par
+ // \par
+ lock tables company read;\par
+ //\par
+ insert into company\par
+ values(2,'Nissan',10);\par
+ //\par
+ unlock tables;//\par
+  \par
+ //\par
+ ------------------------------------------------------------------------------------------------------------------------\par
+\par
+ /* Insertion into other tables using select subqueries and nested queries */\par
+ //\par
+ insert into invoice\par
+select 1,(select adddate((Select request.Request_Date from request where Request_ID=1),03)) \par
+,750000;//\par
+insert into invoice\par
+select 2,(select adddate((Select request.Request_Date from request where Request_ID=2),03)) \par
+,2250000;//\par
+insert into invoice\par
+select 3,(select adddate((Select request.Request_Date from request where Request_ID=3),03)) \par
+,675000;//\par
+insert into invoice\par
+select 4,(select adddate((Select request.Request_Date from request where Request_ID=4),03)) \par
+,80000;//\par
+insert into invoice\par
+select 5,(select adddate((Select request.Request_Date from request where Request_ID=5),03)) \par
+,700000;//\par
+insert into invoice\par
+select 6,(select adddate((Select request.Request_Date from request where Request_ID=6),03)) \par
+,90000;//\par
+\par
+\par
+insert into request\par
+values(1,50,'2017-10-09',1,1,'2GA',1,1);//\par
+insert into request\par
+values(2,75,'2017-07-09',1,4,'ABEILLE',1,4);//\par
+insert into request\par
+values(3,15,'2017-06-09',1,7,'MUSTANG',1,7);//\par
+insert into request\par
+values(4,04,'2017-12-09',1,2,'300',1,2);//\par
+insert into request\par
+values(5,20,'2017-02-09',1,5,'ANGLIA',1,5);//\par
+\par
+/*INSERTING NEW REQUEST USING NESTED SELECT AND SELECT IN INSERT */\par
+insert into request\par
+select 6,10,(select adddate((select Request_Date from request where Request_ID=5),03)),1,1,'2GA',1,1;\par
+\par
+//\par
+insert into demand()\par
+values(1,50,'2017-10-06',1,1,4,1,'2GA',1);//\par
+insert into demand()\par
+values(2,75,'2017-07-06',1,1,3,4,'ABEILLE',1);//\par
+insert into demand()\par
+values(3,15,'2017-06-06',1,1,2,7,'MUSTANG',1);//\par
+insert into demand()\par
+values(4,04,'2017-12-06',1,1,5,2,'300',1);//\par
+insert into demand()\par
+values(5,20,'2017-02-06',1,1,1,5,'ANGLIA',1);//\par
+\par
+insert into demand\par
+select 6,(select request.Request_Quantity from request where Request_ID=6),\par
+'2017-02-12',1,1,4,1,'2GA',1;\par
+\par
+//\par
+insert into production\par
+select 1,'starting',(select request.Request_Quantity from request where Request_ID=1),1,1,1;//\par
+insert into production\par
+select 2,'starting',(select request.Request_Quantity from request where Request_ID=2),2,2,2;//\par
+insert into production\par
+select 3,'starting',(select request.Request_Quantity from request where Request_ID=3),3,3,3;//\par
+insert into production\par
+select 4,'starting',(select request.Request_Quantity from request where Request_ID=4),4,4,4;//\par
+insert into production\par
+select 5,'starting',(select request.Request_Quantity from request where Request_ID=5),5,5,5;//\par
+insert into production\par
+select 6,'starting',(select request.Request_Quantity from request where Request_ID=6),1,6,6;//\par
+\par
+//\par
+insert into shipment\par
+select 1,(select adddate((select Request.Request_Date from Request where Request.request_id=1),04))\par
+,(select Request.Request_Quantity from request where request.Request_ID=1)\par
+,'dispatched','FedX',1,1,1,\par
+(select demand.Distributor_D_ID from demand where Demand_Id=1);//\par
+insert into shipment\par
+select 2,(select adddate((select Request.Request_Date from Request where Request.request_id=2),04))\par
+,(select Request.Request_Quantity from request where request.Request_ID=2)\par
+,'dispatched','FedX',2,2,1,(select demand.Distributor_D_ID from demand where Demand_Id=2);//\par
+insert into shipment\par
+select 3,(select adddate((select Request.Request_Date from Request where Request.request_id=3),04))\par
+,(select Request.Request_Quantity from request where request.Request_ID=3)\par
+,'dispatched','FedX',3,3,1,(select demand.Distributor_D_ID from demand where Demand_Id=3);//\par
+insert into shipment\par
+select 4,(select adddate((select Request.Request_Date from Request where Request.request_id=4),04))\par
+,(select Request.Request_Quantity from request where request.Request_ID=4)\par
+,'dispatched','FedX',4,4,1,(select demand.Distributor_D_ID from demand where Demand_Id=4);//\par
+insert into shipment\par
+select 5,(select adddate((select Request.Request_Date from Request where Request.request_id=5),04))\par
+,(select Request.Request_Quantity from request where request.Request_ID=5)\par
+,'dispatched','FedX',5,5,1,(select demand.Distributor_D_ID from demand where Demand_Id=5);//\par
+select 6,(select adddate((select Request.Request_Date from Request where Request.request_id=6),04))\par
+,(select Request.Request_Quantity from request where request.Request_ID=6)\par
+,'dispatched','FedX',5,5,1,(select demand.Distributor_D_ID from demand where Demand_Id=6);//\par
+//\par
+\par
+insert into payment\par
+select 1,'Cheque',\par
+(Select adddate((Select request.Request_Date from request where Request_ID=1),10)),\par
+'Paid',\par
+1,\par
+(select shipment.Distributor_Company_Company_ID from shipment where shipment.Shipment_Id=1),\par
+(select shipment.Distributor_D_ID from shipment where shipment.Shipment_Id=1);//\par
+\par
+insert into payment\par
+select 2,'Cheque',\par
+(Select adddate((Select request.Request_Date from request where Request_ID=2),10)),\par
+'Paid',\par
+2,\par
+(select shipment.Distributor_Company_Company_ID from shipment where shipment.Shipment_Id=2),\par
+(select shipment.Distributor_D_ID from shipment where shipment.Shipment_Id=2);//\par
+\par
+insert into payment\par
+select 3,'Cheque',\par
+(Select adddate((Select request.Request_Date from request where Request_ID=3),10)),\par
+'Paid',\par
+3,\par
+(select shipment.Distributor_Company_Company_ID from shipment where shipment.Shipment_Id=3),\par
+(select shipment.Distributor_D_ID from shipment where shipment.Shipment_Id=3);//\par
+\par
+insert into payment\par
+select 4,'Cheque',\par
+(Select adddate((Select request.Request_Date from request where Request_ID=4),10)),\par
+'Paid',\par
+4,\par
+(select shipment.Distributor_Company_Company_ID from shipment where shipment.Shipment_Id=4),\par
+(select shipment.Distributor_D_ID from shipment where shipment.Shipment_Id=4);//\par
+\par
+insert into payment\par
+select 5,'Cheque',\par
+(Select adddate((Select request.Request_Date from request where Request_ID=5),10)),\par
+'Paid',\par
+5,\par
+(select shipment.Distributor_Company_Company_ID from shipment where shipment.Shipment_Id=5),\par
+(select shipment.Distributor_D_ID from shipment where shipment.Shipment_Id=5);//\par
+\par
+insert into payment\par
+select 6,'Cheque',\par
+(Select adddate((Select request.Request_Date from request where Request_ID=6),10)),\par
+'Paid',\par
+6,\par
+(select shipment.Distributor_Company_Company_ID from shipment where shipment.Shipment_Id=6),\par
+(select shipment.Distributor_D_ID from shipment where shipment.Shipment_Id=6);\par
+\par
+--------------------------------------------------------------------------------------------------------------------------\par
+}
+ 
